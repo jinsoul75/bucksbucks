@@ -32,4 +32,4 @@ jobs:
 
       # 테스트가 있다면
       - name: Test
-        run: yarn test
+        run: yarn test --passWithNoTests
