@@ -32,3 +32,6 @@ dist-ssr
 !.yarn/versions
 
 node_modules
+
+.yarn/*
+.vscode/*
