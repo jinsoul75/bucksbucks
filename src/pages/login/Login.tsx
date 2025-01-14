@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import kakao from '@/assets/kakao.webp';
-import google from '@/assets/google.webp';
-import naver from '@/assets/naver.webp';
+import kakao from '@/assets/images/kakao.webp';
+import google from '@/assets/images/google.webp';
+import naver from '@/assets/images/naver.webp';
 import Image from '../../components/image/Image';
 
 export default function Login() {

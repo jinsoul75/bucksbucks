@@ -9,8 +9,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#FEF3E2', //연노랑색
-        secondary: '#155e13', //녹색
+        yellow: {
+          light: '#FEF3E2', // 연노랑색 (기존 primary)
+          dark: '#fab12f', // 진노랑색 (기존 tertiary)
+          hover: '#fa812f', // 진노랑색 (기존 tertiary)
+        },
+        green: {
+          DEFAULT: '#155e13', // 녹색 (기존 secondary)
+        },
+      },
+      fontFamily: {
+        pretendard: ['Pretendard', 'sans-serif'],
       },
     },
   },
