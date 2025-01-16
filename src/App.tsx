@@ -11,12 +11,12 @@ function App() {
       <Image src={Logo} alt="logo" className="w-1/3" />
 
       <div className="flex gap-2">
-        <Button>
-          <Link to="/login">로그인</Link>
-        </Button>
-        <Button>
-          <Link to="/signup">회원가입</Link>
-        </Button>
+        <Link to="/login">
+          <Button>로그인</Button>
+        </Link>
+        <Link to="/signup">
+          <Button>회원가입</Button>
+        </Link>
       </div>
     </section>
   );
