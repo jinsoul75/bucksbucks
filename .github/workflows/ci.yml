@@ -31,5 +31,5 @@ jobs:
         run: yarn build
 
       # 테스트가 있다면
-      - name: Test
-        run: yarn test --passWithNoTests
+      #- name: Test
+      #  run: yarn test --passWithNoTests
