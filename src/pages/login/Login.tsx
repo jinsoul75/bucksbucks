@@ -7,7 +7,6 @@ import Image from '../../components/image/Image';
 export default function Login() {
   return (
     <div>
-      Login
       <div>
         <Link to="/dashboard">dashboard로 이동</Link>
         <Image src={kakao} alt="kakao" className="w-10 h-10" />
