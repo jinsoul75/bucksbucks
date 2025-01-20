@@ -11,6 +11,9 @@ function App() {
       <Image src={Logo} alt="logo" className="w-1/3" />
 
       <div className="flex gap-2">
+        <Link to="/dashboard">
+          <Button>Dashboard</Button>
+        </Link>
         <Link to="/login">
           <Button>로그인</Button>
         </Link>

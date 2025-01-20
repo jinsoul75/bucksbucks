@@ -1,11 +1,10 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import Nav from './Nav';
 
 export default function Dashboard() {
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <Link to="/dashboard">calendar로 이동</Link>
-      <Link to="/dashboard/statistics">statistics로 이동</Link>
+    <div className="flex gap-5">
+      <Nav />
       <Outlet />
     </div>
   );
