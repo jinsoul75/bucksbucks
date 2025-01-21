@@ -1,11 +1,12 @@
 import { z } from 'zod';
 import { useForm, FormProvider } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import Button from '../../components/common/button/Button';
-import FormInput from '../../components/common/input/FormInput';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
-import instance from '../../apis/interceptor';
+
+import Button from '@/components/common/button/Button';
+import FormInput from '@/components/common/input/FormInput';
+import instance from '@/apis/interceptor';
 
 const accountSchema = z
   .object({

@@ -11,9 +11,10 @@
     "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["src/components/*"],
       "@/*": ["src/*"],
-      "@apis/*": ["src/apis/*"]
+      "@apis/*": ["src/apis/*"],
+      "@components/*": ["src/components/*"],
+      "@assets/*": ["src/assets/*"]
     }
   }
 }

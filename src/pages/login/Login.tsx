@@ -4,15 +4,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 
-import instance from '../../apis/interceptor';
+import instance from '@/apis/interceptor';
 
 import naver from '@/assets/images/naver.webp';
 import kakao from '@/assets/images/kakao.webp';
 import google from '@/assets/images/google.webp';
 
-import Image from '../../components/image/Image';
-import Button from '../../components/common/button/Button';
-import FormInput from '../../components/common/input/FormInput';
+import Image from '@/components/image/Image';
+import Button from '@/components/common/button/Button';
+import FormInput from '@/components/common/input/FormInput';
 
 const accountSchema = z.object({
   email: z
