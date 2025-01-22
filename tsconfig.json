@@ -6,7 +6,7 @@
     "jsx": "react-jsx",
     "moduleResolution": "node",
     "module": "ESNext",
-    "types": ["vitest", "react", "react-dom", "node"],
+    "types": ["vitest", "react", "react-dom", "node", "vite-plugin-svgr/client"],
     "allowJs": true,
     "esModuleInterop": true,
     "baseUrl": ".",

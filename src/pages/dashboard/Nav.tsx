@@ -6,15 +6,15 @@ export default function Nav() {
 
   const menuItemClass = (menu: 'calendar' | 'statistics') =>
     `p-2 border border-gray-800 rounded-md transition-colors duration-200 cursor-pointer ${
-      selectedMenu === menu ? 'bg-yellow-dark text-white' : 'hover:bg-yellow-light'
+      selectedMenu === menu ? 'bg-yellow-dark text-white' : 'hover:bg-yellow-hover'
     }`;
 
   return (
     <nav>
       <ul className="flex flex-col gap-2">
         <li className={menuItemClass('calendar')}>
-          <Link 
-            to="/dashboard" 
+          <Link
+            to="/dashboard"
             className="block w-full h-full"
             onClick={() => setSelectedMenu('calendar')}
           >
@@ -22,8 +22,8 @@ export default function Nav() {
           </Link>
         </li>
         <li className={menuItemClass('statistics')}>
-          <Link 
-            to="/dashboard/statistics" 
+          <Link
+            to="/dashboard/statistics"
             className="block w-full h-full"
             onClick={() => setSelectedMenu('statistics')}
           >

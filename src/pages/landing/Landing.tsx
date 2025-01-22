@@ -1,5 +1,5 @@
-import Image from '../../components/image/Image';
-import bucksbucks from '@/assets/bucksbucks.webp';
+import Image from '@/components/image/Image';
+import bucksbucks from '@/assets/images/bucksbucks.webp';
 export default function Landing() {
   return (
     <div>
