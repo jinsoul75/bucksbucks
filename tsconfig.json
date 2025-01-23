@@ -16,5 +16,8 @@
       "@components/*": ["src/components/*"],
       "@assets/*": ["src/assets/*"]
     }
-  }
+  },
+  "include": [
+    "types/**/*.d.ts" // 또는 "types"
+  ]
 }
