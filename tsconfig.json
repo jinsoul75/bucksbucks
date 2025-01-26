@@ -15,7 +15,8 @@
       "@apis/*": ["src/apis/*"],
       "@components/*": ["src/components/*"],
       "@assets/*": ["src/assets/*"]
-    }
+    },
+    "allowSyntheticDefaultImports": true
   },
   "include": [
     "types/**/*.d.ts" // 또는 "types"
