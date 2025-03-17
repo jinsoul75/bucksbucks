@@ -1,33 +1,33 @@
-import { z } from 'zod';
-import { useForm, FormProvider } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useNavigate } from 'react-router-dom';
-import { useMutation } from '@tanstack/react-query';
+import { z } from "zod";
+import { useForm, FormProvider } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useNavigate } from "react-router-dom";
+import { useMutation } from "@tanstack/react-query";
 
-import Button from '@/components/common/button/Button';
-import FormInput from '@/components/common/input/FormInput';
-import instance from '@/apis/interceptor';
+import Button from "@/components/common/button/Button";
+import FormInput from "@/components/common/input/FormInput";
+import instance from "@/apis/interceptor";
 
 const accountSchema = z
   .object({
     nickname: z
       .string()
-      .nonempty('닉네임을 입력해주세요')
-      .min(2, '최소 2자 이상 입력해주세요'),
+      .nonempty("닉네임을 입력해주세요")
+      .min(2, "최소 2자 이상 입력해주세요"),
     email: z
       .string()
-      .nonempty('이메일을 입력해주세요')
-      .email('올바른 이메일 형식이 아닙니다'),
+      .nonempty("이메일을 입력해주세요")
+      .email("올바른 이메일 형식이 아닙니다"),
     password: z
       .string()
-      .nonempty('비밀번호를 입력해주세요')
-      .min(6, '최소 6자 이상 입력해주세요')
-      .max(12, '최대 12자까지 가능합니다'),
-    passwordConfirm: z.string().nonempty('비밀번호 확인을 입력해주세요'),
+      .nonempty("비밀번호를 입력해주세요")
+      .min(6, "최소 6자 이상 입력해주세요")
+      .max(12, "최대 12자까지 가능합니다"),
+    passwordConfirm: z.string().nonempty("비밀번호 확인을 입력해주세요")
   })
   .refine((data) => data.password === data.passwordConfirm, {
-    message: '비밀번호가 일치하지 않습니다',
-    path: ['passwordConfirm'],
+    message: "비밀번호가 일치하지 않습니다",
+    path: ["passwordConfirm"]
   });
 
 type Account = z.infer<typeof accountSchema>;
@@ -37,17 +37,17 @@ export default function Signup() {
 
   const methods = useForm<Account>({
     resolver: zodResolver(accountSchema),
-    mode: 'onChange',
+    mode: "onChange"
   });
 
   const { mutate: signup } = useMutation({
-    mutationFn: (account: Account) => instance.post('/api/signup', account),
+    mutationFn: (account: Account) => instance.post("/api/signup", account),
     onSuccess: () => {
-      navigate('/');
+      navigate("/");
     },
     onError: (error) => {
       alert(error.message);
-    },
+    }
   });
 
   const onSubmit = (data: Account) => {
@@ -63,11 +63,18 @@ export default function Signup() {
         >
           <FormInput name="nickname" label="Nickname" type="text" />
           <FormInput name="email" label="Email" type="email" />
+          <Button className="text-sm" onClick={() => {}}>
+            발송
+          </Button>
+          <FormInput name="authCode" label="인증번호" type="text" />
+          <Button className="text-sm" onClick={() => {}}>
+            인증확인
+          </Button>
           <FormInput name="password" label="Password" type="password" />
           <FormInput
             name="passwordConfirm"
             label="Password Confirm"
-            type="passwordConfirm"
+            type="password"
           />
           <Button type="submit">Signup</Button>
         </form>

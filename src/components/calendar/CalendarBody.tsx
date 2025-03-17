@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
-import MonthController from './MonthController';
-import MonthlyTotal from './MonthlyTotal';
-import Week from './Week';
-import Month from './Month';
-import { DayData } from './types';
+import { useState, useEffect } from "react";
+import MonthController from "./MonthController";
+import MonthlyTotal from "./MonthlyTotal";
+import Week from "./Week";
+import Month from "./Month";
+import { DayData } from "./types";
 
 const CalendarBody: React.FC = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -26,7 +26,7 @@ const CalendarBody: React.FC = () => {
         date: new Date(year, month - 1, prevMonth.getDate() - i),
         income: 0,
         expense: 0,
-        transactions: [],
+        transactions: []
       });
     }
 
@@ -35,7 +35,7 @@ const CalendarBody: React.FC = () => {
         date: new Date(year, month, i),
         income: 0,
         expense: 0,
-        transactions: [],
+        transactions: []
       });
     }
 
@@ -49,7 +49,7 @@ const CalendarBody: React.FC = () => {
         date: new Date(year, month + 1, i),
         income: 0,
         expense: 0,
-        transactions: [],
+        transactions: []
       });
     }
 
@@ -57,11 +57,15 @@ const CalendarBody: React.FC = () => {
   };
 
   const prevMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() - 1)
+    );
   };
 
   const nextMonth = () => {
-    setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1));
+    setCurrentDate(
+      new Date(currentDate.getFullYear(), currentDate.getMonth() + 1)
+    );
   };
 
   const thisMonth = () => {
@@ -73,7 +77,7 @@ const CalendarBody: React.FC = () => {
   }, [currentDate]);
 
   return (
-    <div className="w-full h-full max-w-4xl  mx-auto flex flex-col gap-4">
+    <div className="w-full h-full max-w-4xl mx-auto flex flex-col gap-4">
       <div>
         <MonthController
           currentDate={currentDate}
