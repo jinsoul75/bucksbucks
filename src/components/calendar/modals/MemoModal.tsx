@@ -1,4 +1,3 @@
-import Modal from '@/components/common/modal/Modal';
 
 interface MemoModalProps {
   onClose: () => void;
@@ -6,7 +5,6 @@ interface MemoModalProps {
 
 export default function MemoModal({ onClose }: MemoModalProps) {
   return (
-    <Modal onClose={onClose}>
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-[400px]">
         <h2 className="text-xl font-bold mb-4">메모</h2>
 
@@ -24,6 +22,5 @@ export default function MemoModal({ onClose }: MemoModalProps) {
           </div>
         </div>
       </div>
-    </Modal>
   );
 }

@@ -10,7 +10,8 @@ import Dashboard from "./pages/dashboard/Dashboard.tsx";
 import Calendar from "./pages/dashboard/Calendar.tsx";
 import Statistics from "./pages/dashboard/Statistics.tsx";
 import Signup from "./pages/signup/Signup.tsx";
-import Layout from "./components/layout/Layout.tsx";
+import Layout from "@/components/layout/Layout.tsx";
+import ModalContainer from "@/components/common/modal/ModalContainer.tsx";
 
 const queryClient = new QueryClient()
 
@@ -29,6 +30,7 @@ createRoot(document.getElementById("root")!).render(
             </Route>
           </Route>
         </Routes>
+        <ModalContainer />
       </BrowserRouter>
     </QueryClientProvider>
   </StrictMode>

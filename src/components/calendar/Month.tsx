@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { DayData } from "./types";
+import useModalStore from "@/store/useModalStore";
+
+import DailyListModal from "./modals/DailyListModal";
 
 export default function Month({
   calendarDays,
@@ -10,12 +13,17 @@ export default function Month({
 }) {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
+  const { openModal } = useModalStore();
+
   return (
     <div className="grid grid-cols-7 border border-gray-200 rounded-b-md overflow-hidden max-h-full grow">
       {calendarDays.map((day, index) => (
         <div
           key={index}
-          onClick={() => setSelectedDate(day.date)}
+          onClick={() => {
+            setSelectedDate(day.date);
+            openModal("SPEND_MODAL", DailyListModal, {});
+          }}
           className={`
           bg-white p-2
           ${day.date.getMonth() !== currentDate.getMonth() ? "opacity-50" : ""}

@@ -1,5 +1,4 @@
 import FormInput from '@/components/common/input/FormInput';
-import Modal from '@/components/common/modal/Modal';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
@@ -32,10 +31,8 @@ export default function AddModal({ onClose }: AddModalProps) {
   };
 
   return (
-    <Modal onClose={onClose}>
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 w-[480px] space-y-4">
         <h2 className="text-xl font-bold">입력</h2>
-
         <div className="flex items-center gap-4">
           <button
             className={`px-4 border rounded  ${
@@ -75,6 +72,5 @@ export default function AddModal({ onClose }: AddModalProps) {
           </form>
         </FormProvider>
       </div>
-    </Modal>
   );
 }
