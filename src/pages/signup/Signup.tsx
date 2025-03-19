@@ -17,7 +17,8 @@ export default function Signup() {
     isEmailChecked,
     methods,
     duplicateResult,
-    isSubmitting
+    isSubmitting,
+    // isEmailCheckLoading
   } = useSignupForm();
 
   const onSubmit = (data: AuthFormValues) => {

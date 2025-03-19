@@ -26,7 +26,7 @@ export function useSignupForm() {
     mode: "onChange"
   });
 
-  const { data: duplicateResult } =
+  const { data: duplicateResult, isLoading: isEmailCheckLoading } =
     useCheckEmail(emailToCheck);
 
   const handleEmailCheck = () => {
@@ -37,18 +37,6 @@ export function useSignupForm() {
     }
     setEmailToCheck(email);
     setIsEmailChecked(true);
-  };
-
-  const { mutate: signup, isPending: isSubmitting } = useSignup(signupData);
-
-  const handleSignup = (data: AuthFormValues) => {
-    const requestData: AuthFormValues = {
-      email: data.email,
-      password: data.password,
-    };
-
-    setSignupData(requestData);
-    signup();
   };
 
   const { mutate: sendEmail } = useSendEmail(emailToSend);
@@ -74,8 +62,18 @@ export function useSignupForm() {
     setAuthCode(authCode);
     verifyCode();
   };
-  //   const isLoading =
-  //     isSignupLoading || isEmailCheckLoading || isAuthVerifyLoading;
+
+  const { mutate: signup, isPending: isSubmitting } = useSignup(signupData);
+
+  const handleSignup = (data: AuthFormValues) => {
+    const requestData: AuthFormValues = {
+      email: data.email,
+      password: data.password
+    };
+
+    setSignupData(requestData);
+    signup();
+  };
 
   return {
     handleEmailCheck,
@@ -85,6 +83,7 @@ export function useSignupForm() {
     methods,
     duplicateResult,
     isEmailChecked,
-    isSubmitting
+    isSubmitting,
+    isEmailCheckLoading
   };
 }
