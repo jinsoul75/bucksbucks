@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import Button from "@/components/common/button/Button";
 import FormInput from "@/components/common/input/FormInput";
-
 import { AuthFormValues } from "./types";
 import { useSignupForm } from "./useSignupForm";
 
@@ -11,11 +10,13 @@ export default function Signup() {
   const navigate = useNavigate();
 
   const {
+    handleEmailCheck,
+    handleEmailSend,
+    handleSignup,
     isEmailChecked,
     methods,
-    handleEmailCheck,
-    isDuplicate,
-    handleSignup
+    duplicateResult,
+    isSubmitting
   } = useSignupForm();
 
   const onSubmit = (data: AuthFormValues) => {
@@ -30,32 +31,35 @@ export default function Signup() {
           className="flex flex-col gap-4 w-64"
           onSubmit={methods.handleSubmit(onSubmit)}
         >
-          <FormInput name="email" label="Email" type="email" />
+          <FormInput name="email" label="이메일" type="email" />
           {isEmailChecked ? (
-            isDuplicate ? (
-              <p className="text-red-500 text-sm">
-                이미 존재하는 아이디 입니다.
-              </p>
-            ) : (
-              <p className="text-blue-500 text-sm">
-                사용 가능한 아이디 입니다.
-              </p>
-            )
+            <p
+              className={`${
+                duplicateResult.resultData ? "text-red-500" : "text-blue-500"
+              } text-sm`}
+            >
+              {duplicateResult.message}
+            </p>
           ) : null}
           <Button className="text-sm" onClick={handleEmailCheck} type="button">
             중복체크
+          </Button>
+          <Button className="text-sm" onClick={handleEmailSend} type="button">
+            인증번호 전송
           </Button>
           <FormInput name="authCode" label="인증번호" type="text" />
           <Button className="text-sm" onClick={() => {}}>
             인증확인
           </Button>
-          <FormInput name="password" label="Password" type="password" />
+          <FormInput name="password" label="비밀번호" type="password" />
           <FormInput
             name="passwordConfirm"
-            label="Password Confirm"
+            label="비밀번호 확인"
             type="password"
           />
-          <Button type="submit">Signup</Button>
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "처리 중..." : "회원가입"}
+          </Button>
         </form>
       </FormProvider>
     </section>

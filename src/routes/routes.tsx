@@ -1,6 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 
-import "./index.css";
 import Login from "@/pages/login/Login.tsx";
 import Dashboard from "@/pages/dashboard/Dashboard.tsx";
 import Calendar from "@/pages/dashboard/Calendar.tsx";

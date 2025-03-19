@@ -11,16 +11,14 @@ export function useCheckEmail(email: string) {
 }
 
 export function useSendEmail(email: string) {
-  return useQuery({
-    queryKey: ["sendEmail", email],
-    queryFn: () => authAPI.sendEmail(email),
+  return useMutation({
+    mutationFn: () => authAPI.sendEmail(email),
   });
 }
 
 export function useVerifyCode(email: string, code: string) {
-  return useQuery({
-    queryKey: ["verifyCode", email, code],
-    queryFn: () => authAPI.verifyCode(email, code),
+  return useMutation({
+    mutationFn: () => authAPI.verifyCode(email, code),
   });
 }
 
