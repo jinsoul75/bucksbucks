@@ -22,7 +22,11 @@ export const authAPI = {
     return response.data;
   },
   signup: async (data: AuthFormValues) => {
-    const response = await axios.post(`${API_URL}/join/signup`, data);
+    const addRole = {
+      ...data,
+      userRole: "ADMIN"
+    }
+    const response = await axios.post(`${API_URL}/join/register`, addRole);
     return response.data;
   },
   login: async (data: AuthFormValues) => {

@@ -13,6 +13,7 @@ export default function Signup() {
     handleEmailCheck,
     handleEmailSend,
     handleSignup,
+    handleAuthCodeVerify,
     isEmailChecked,
     methods,
     duplicateResult,
@@ -35,10 +36,10 @@ export default function Signup() {
           {isEmailChecked ? (
             <p
               className={`${
-                duplicateResult.resultData ? "text-red-500" : "text-blue-500"
+                duplicateResult?.resultData ? "text-red-500" : "text-blue-500"
               } text-sm`}
             >
-              {duplicateResult.message}
+              {duplicateResult?.message}
             </p>
           ) : null}
           <Button className="text-sm" onClick={handleEmailCheck} type="button">
@@ -48,7 +49,7 @@ export default function Signup() {
             인증번호 전송
           </Button>
           <FormInput name="authCode" label="인증번호" type="text" />
-          <Button className="text-sm" onClick={() => {}}>
+          <Button className="text-sm" onClick={handleAuthCodeVerify}>
             인증확인
           </Button>
           <FormInput name="password" label="비밀번호" type="password" />

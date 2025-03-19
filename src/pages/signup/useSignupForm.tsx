@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { signupSchema } from "./schema";
-import { AuthFormValues } from "./types";
+import { AuthFormValues, SignupFormValues } from "./types";
 import {
   useCheckEmail,
   useSendEmail,
@@ -21,7 +21,7 @@ export function useSignupForm() {
     password: ""
   });
 
-  const methods = useForm<AuthFormValues>({
+  const methods = useForm<SignupFormValues>({
     resolver: zodResolver(signupSchema),
     mode: "onChange"
   });
@@ -44,7 +44,7 @@ export function useSignupForm() {
   const handleSignup = (data: AuthFormValues) => {
     const requestData: AuthFormValues = {
       email: data.email,
-      password: data.password
+      password: data.password,
     };
 
     setSignupData(requestData);
@@ -65,7 +65,8 @@ export function useSignupForm() {
 
   const { mutate: verifyCode } = useVerifyCode(emailToSend, authCode);
 
-  const handleAuthCodeVerify = (authCode: string) => {
+  const handleAuthCodeVerify = () => {
+    const authCode = methods.getValues("authCode");
     if (!authCode) {
       alert("인증번호를 입력해주세요.");
       return;
