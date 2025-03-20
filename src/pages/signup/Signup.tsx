@@ -1,12 +1,13 @@
-import { FormProvider } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { FormProvider } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
-import { AuthFormValues } from "./types";
-import { useSignupForm } from "./useSignupForm";
+import { AuthFormValues } from './types';
+import { useSignupForm } from './useSignupForm';
 
-import Button from "@/components/common/button/Button";
-import FormInput from "@/components/common/input/FormInput";
-import Loading from "@/components/common/loading/Loading";
+import Button from '@/components/common/button/Button';
+import FormInput from '@/components/common/input/FormInput';
+import Loading from '@/components/common/loading/Loading';
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -17,24 +18,27 @@ export default function Signup() {
     handleSignup,
     handleAuthCodeVerify,
     isEmailChecked,
-    //isEmailValid,
     methods,
     duplicateResult,
     isSubmitting,
     isVerifiedCode,
     isEmailCheckLoading,
     isEmailSendLoading,
-    isAuthCodeVerifyLoading
+    isAuthCodeVerifyLoading,
+    isEmailValid,
+    isAllValid,
   } = useSignupForm();
+
+  const [isEmailSendDisabled, setIsEmailSendDisabled] = useState(false);
 
   const onSubmit = (data: AuthFormValues) => {
     handleSignup(data);
-    navigate("/login");
+    navigate('/login');
   };
 
   return (
     <section className="w-full min-h-[calc(100vh-120px)] flex flex-col items-center justify-center">
-      <Button onClick={() => navigate("/")} type="button">
+      <Button onClick={() => navigate('/')} type="button">
         메인으로 돌아가기
       </Button>
       <FormProvider {...methods}>
@@ -47,7 +51,7 @@ export default function Signup() {
           {isEmailChecked ? (
             <p
               className={`${
-                duplicateResult?.resultData ? "text-red-500" : "text-blue-500"
+                duplicateResult?.resultData ? 'text-red-500' : 'text-blue-500'
               } text-sm`}
             >
               {duplicateResult?.message}
@@ -56,30 +60,52 @@ export default function Signup() {
 
           {isEmailCheckLoading ? (
             <Loading />
-          ) : !isEmailChecked || duplicateResult?.resultData ? (
+          ) : (
             <Button
+              disabled={!isEmailValid || isEmailChecked}
               className="text-sm"
               onClick={handleEmailCheck}
               type="button"
             >
               중복체크
             </Button>
-          ) : null}
+          )}
 
           {isEmailSendLoading ? (
             <Loading />
-          ) : duplicateResult?.resultData ? null : (
-            <Button className="text-sm" onClick={handleEmailSend} type="button">
+          ) : (
+            <Button
+              disabled={
+                !isEmailChecked || duplicateResult?.resultData || isEmailSendDisabled
+              }
+              className="text-sm"
+              onClick={() => {
+                handleEmailSend();
+                setIsEmailSendDisabled(true);
+              }}
+              type="button"
+            >
               인증번호 전송
             </Button>
           )}
 
-          <FormInput name="authCode" label="인증번호" type="text" />
+          <FormInput
+            disabled={isVerifiedCode || !isEmailChecked}
+            name="authCode"
+            label="인증번호"
+            type="text"
+          />
 
           {isAuthCodeVerifyLoading ? (
             <Loading />
           ) : (
             <Button
+              disabled={
+                isVerifiedCode ||
+                !isEmailChecked ||
+                duplicateResult?.resultData ||
+                !isEmailSendDisabled
+              }
               className="text-sm"
               onClick={handleAuthCodeVerify}
               type="button"
@@ -90,26 +116,21 @@ export default function Signup() {
 
           {isVerifiedCode !== undefined ? (
             isVerifiedCode ? (
-              <p className="text-blue-500 text-sm">
-                인증번호가 확인되었습니다.
-              </p>
+              <p className="text-blue-500 text-sm">인증번호가 확인되었습니다.</p>
             ) : (
-              <p className="text-red-500 text-sm">
-                인증번호가 일치하지 않습니다.
-              </p>
+              <p className="text-red-500 text-sm">인증번호가 일치하지 않습니다.</p>
             )
           ) : null}
 
           <FormInput name="password" label="비밀번호" type="password" />
 
-          <FormInput
-            name="passwordConfirm"
-            label="비밀번호 확인"
-            type="password"
-          />
+          <FormInput name="passwordConfirm" label="비밀번호 확인" type="password" />
 
-          <Button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? "처리 중..." : "회원가입"}
+          <Button
+            disabled={!isEmailValid || !isVerifiedCode || !isEmailChecked || isAllValid}
+            type="submit"
+          >
+            {isSubmitting ? '처리 중...' : '회원가입'}
           </Button>
         </form>
       </FormProvider>
