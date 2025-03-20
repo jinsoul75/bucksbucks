@@ -9,13 +9,13 @@ import {
   useSignup,
   useVerifyCode
 } from "@/apis/auth/hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export function useSignupForm() {
   const [emailToCheck, setEmailToCheck] = useState<string>("");
   const [emailToSend, setEmailToSend] = useState<string>("");
   const [authCode, setAuthCode] = useState<string>("");
-  const [isEmailChecked, setIsEmailChecked] = useState<boolean>(false);
+  const [isEmailChecked, setIsEmailChecked] = useState<boolean | null>(null);
   const [signupData, setSignupData] = useState<AuthFormValues>({
     email: "",
     password: ""
@@ -25,6 +25,17 @@ export function useSignupForm() {
     resolver: zodResolver(signupSchema),
     mode: "onChange"
   });
+
+  const watchedEmail = methods.watch("email");
+
+  const { errors } = methods.formState;
+  const isEmailValid = !errors.email;
+
+  useEffect(() => {
+    if (isEmailChecked && watchedEmail !== emailToCheck) {
+      setIsEmailChecked(false);
+    }
+  }, [watchedEmail, isEmailChecked, emailToCheck]);
 
   const { data: duplicateResult, isLoading: isEmailCheckLoading } =
     useCheckEmail(emailToCheck);
@@ -39,7 +50,8 @@ export function useSignupForm() {
     setIsEmailChecked(true);
   };
 
-  const { mutate: sendEmail } = useSendEmail(emailToSend);
+  const { mutate: sendEmail, isPending: isEmailSendLoading } =
+    useSendEmail(emailToSend);
 
   const handleEmailSend = () => {
     const email = methods.getValues("email");
@@ -51,7 +63,10 @@ export function useSignupForm() {
     sendEmail();
   };
 
-  const { mutate: verifyCode } = useVerifyCode(emailToSend, authCode);
+  const { mutate: verifyCode, data: isVerifiedCode, isPending: isAuthCodeVerifyLoading } = useVerifyCode(
+    emailToSend,
+    authCode
+  );
 
   const handleAuthCodeVerify = () => {
     const authCode = methods.getValues("authCode");
@@ -83,7 +98,11 @@ export function useSignupForm() {
     methods,
     duplicateResult,
     isEmailChecked,
+    isVerifiedCode,
     isSubmitting,
-    isEmailCheckLoading
+    isEmailCheckLoading,
+    isEmailSendLoading,
+    isAuthCodeVerifyLoading,
+    isEmailValid
   };
 }

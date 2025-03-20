@@ -23,7 +23,8 @@ export const authAPI = {
   },
   signup: async (data: AuthFormValues) => {
     const addRole = {
-      ...data,
+      userId: data.email,
+      userPwd: data.password,
       userRole: "ADMIN"
     }
     const response = await axios.post(`${API_URL}/join/register`, addRole);
