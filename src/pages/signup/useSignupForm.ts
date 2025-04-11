@@ -12,8 +12,8 @@ export function useSignupForm() {
   const [authCode, setAuthCode] = useState<string>('');
   const [isEmailChecked, setIsEmailChecked] = useState<boolean>(false);
   const [signupData, setSignupData] = useState<AuthFormValues>({
-    email: '',
-    password: '',
+    userId: '',
+    userPwd: '',
   });
 
   const methods = useForm<SignupFormValues>({
@@ -21,8 +21,8 @@ export function useSignupForm() {
     mode: 'onChange',
   });
   const isAllValid = methods.formState.isValid;
-  const watchedEmail = methods.watch('email');
-  const hasEmailError = !!methods.formState.errors.email;
+  const watchedEmail = methods.watch('userId');
+  const hasEmailError = !!methods.formState.errors.userId;
   const isEmailValid = !!watchedEmail && !hasEmailError;
 
   const watchedAuthCode = methods.watch('authCode');
@@ -37,7 +37,7 @@ export function useSignupForm() {
     useCheckEmail(emailToCheck);
 
   const handleEmailCheck = () => {
-    const email = methods.getValues('email');
+    const email = methods.getValues('userId');
     if (!email) {
       alert('이메일을 입력해주세요.');
       return;
@@ -49,7 +49,7 @@ export function useSignupForm() {
   const { mutate: sendEmail, isPending: isEmailSendLoading } = useSendEmail(emailToSend);
 
   const handleEmailSend = () => {
-    const email = methods.getValues('email');
+    const email = methods.getValues('userId');
     if (!email) {
       alert('이메일을 입력해주세요.');
       return;
@@ -78,8 +78,8 @@ export function useSignupForm() {
 
   const handleSignup = (data: AuthFormValues) => {
     const requestData: AuthFormValues = {
-      email: data.email,
-      password: data.password,
+      userId: data.userId,
+      userPwd: data.userPwd,
     };
 
     setSignupData(requestData);
