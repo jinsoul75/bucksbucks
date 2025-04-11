@@ -8,8 +8,8 @@ import { useState } from "react";
 
 export function useLoginForm() {
   const [loginData, setLoginData] = useState<LoginFormValues>({
-    email: "",
-    password: ""
+    userId: "",
+    userPwd: ""
   });
 
   const methods = useForm<LoginFormValues>({
@@ -20,9 +20,11 @@ export function useLoginForm() {
   const { mutate: login } = useLogin(loginData);
 
   const handleLogin = (data: LoginFormValues) => {
+    console.log("data", data);
     const requestData: LoginFormValues = {
-      email: data.email,
-      password: data.password
+      userId: data.userId,
+      userPwd: data.userPwd,
+      keepLogin: data.keepLogin
     };
     setLoginData(requestData);
     login();

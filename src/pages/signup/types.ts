@@ -1,10 +1,10 @@
 export interface SignupFormValues {
-  email: string;
+  userId: string;
   authCode: string;
-  password: string;
-  passwordConfirm: string;
+  userPwd: string;
+  userPwdConfirm: string;
 }
 export interface AuthFormValues {
-  email: string;
-  password: string;
+  userId: string;
+  userPwd: string;
 }

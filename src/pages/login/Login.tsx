@@ -18,7 +18,12 @@ export default function Login() {
   const { methods, handleLogin } = useLoginForm();
 
   const onSubmit = (data: LoginFormValues) => {
-    handleLogin(data);
+    const loginData = {
+      ...data,
+      keepLogin: true
+    };
+
+    handleLogin(loginData);
     navigate("/dashboard");
   };
 
@@ -29,8 +34,8 @@ export default function Login() {
           className="flex flex-col gap-4 w-64"
           onSubmit={methods.handleSubmit(onSubmit)}
         >
-          <FormInput name="email" label="Email" type="email" />
-          <FormInput name="password" label="Password" type="password" />
+          <FormInput name="userId" label="Email" type="email" />
+          <FormInput name="userPwd" label="Password" type="password" />
 
           <Button type="submit">Sign In</Button>
         </form>

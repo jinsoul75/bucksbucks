@@ -36,6 +36,8 @@ export default function Signup() {
     navigate('/login');
   };
 
+  console.log(!isEmailValid, !isVerifiedCode, !isEmailChecked, isAllValid);
+
   return (
     <section className="w-full min-h-[calc(100vh-120px)] flex flex-col items-center justify-center">
       <Button onClick={() => navigate('/')} type="button">
@@ -127,7 +129,7 @@ export default function Signup() {
           <FormInput name="passwordConfirm" label="비밀번호 확인" type="password" />
 
           <Button
-            disabled={!isEmailValid || !isVerifiedCode || !isEmailChecked || isAllValid}
+            disabled={!isEmailValid || !isVerifiedCode || !isEmailChecked || !isAllValid}
             type="submit"
           >
             {isSubmitting ? '처리 중...' : '회원가입'}

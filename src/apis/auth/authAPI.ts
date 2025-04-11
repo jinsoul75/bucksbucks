@@ -1,21 +1,23 @@
-import axios from "axios";
 import { API_URL } from "../interceptor";
 
 import { AuthFormValues } from "@/pages/signup/types";
+import apiClient from "../interceptor";
 
 export const authAPI = {
   checkEmail: async (email: string) => {
-    const response = await axios.get(
+    const response = await apiClient.get(
       `${API_URL}/join/duplicate-email/${email}`
     );
     return response.data;
   },
   sendEmail: async (email: string) => {
-    const response = await axios.post(`${API_URL}/join/send-email`, { email });
+    const response = await apiClient.post(`${API_URL}/join/send-email`, {
+      email
+    });
     return response.data;
   },
   verifyCode: async (email: string, code: string) => {
-    const response = await axios.post(`${API_URL}/join/verify-code`, {
+    const response = await apiClient.post(`${API_URL}/join/verify-code`, {
       email,
       code
     });
@@ -23,15 +25,15 @@ export const authAPI = {
   },
   signup: async (data: AuthFormValues) => {
     const addRole = {
-      userId: data.email,
-      userPwd: data.password,
+      userId: data.userId,
+      userPwd: data.userPwd,
       userRole: "ADMIN"
-    }
-    const response = await axios.post(`${API_URL}/join/register`, addRole);
+    };
+    const response = await apiClient.post(`${API_URL}/join/register`, addRole);
     return response.data;
   },
   login: async (data: AuthFormValues) => {
-    const response = await axios.post(`${API_URL}/login`, data);
+    const response = await apiClient.post(`${API_URL}/login`, data);
     return response.data;
   }
 };
