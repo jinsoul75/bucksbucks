@@ -12,7 +12,6 @@ const apiClient = axios.create({
 
 apiClient.interceptors.request.use(
   function (config) {
-    config.headers.withCredentials = true;
     return config;
   },
   function (error) {

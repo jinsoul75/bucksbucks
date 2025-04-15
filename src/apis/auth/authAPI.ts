@@ -33,7 +33,9 @@ export const authAPI = {
     return response.data;
   },
   login: async (data: AuthFormValues) => {
-    const response = await apiClient.post(`${API_URL}/login`, data);
+    const response = await apiClient.post(`${API_URL}/login`, data, {
+      withCredentials: true
+    });
     return response.data;
   }
 };
